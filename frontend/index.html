@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>AfterHours — borrow against your stocks, any hour</title>
+  <meta name="description" content="AfterHours lends USDG against tokenized stocks on Robinhood Chain, around the clock, with risk rules that know when the market is closed." />
+  <meta property="og:title" content="AfterHours — borrow against your stocks, any hour" />
+  <meta property="og:description" content="Market-hours-aware lending for tokenized equities on Robinhood Chain." />
+  <meta property="og:image" content="assets/shot-closed.webp" />
+  <meta name="theme-color" content="#0e1630" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='%230e1630'/><path d='M16 3a13 13 0 0 1 0 26z' fill='%23f4b740'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/shot-closed.webp" />
+  <link rel="stylesheet" href="landing.css" />
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="AfterHours home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 3a13 13 0 0 1 0 26z" fill="#f4b740"/></svg>
+      <span>AfterHours</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#bell">The opening bell</a>
+      <a href="#screens">Screenshots</a>
+      <a href="#onchain">Onchain</a>
+    </nav>
+    <a class="live-pill" href="#onchain" id="navLive"><span class="pulse off" id="navPulse"></span><span id="navLiveText">Testnet build</span></a>
+    <a class="btn btn-amber btn-sm" href="app.html">Launch app</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============================================================ hero -->
+  <section class="hero" id="hero" data-phase="night" aria-label="Introduction">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="chain-badge"><span class="pulse off" id="heroPulse"></span><span id="heroChain"><strong>Robinhood Chain</strong> testnet</span></span>
+        <h1>Borrow against your stocks at <span class="clock" id="heroClock">3:00am.</span></h1>
+        <p class="hero-sub">AfterHours lends USDG against tokenized equities around the clock, with risk rules that know when the market is closed. No frozen-price liquidations. No lender losses from opening gaps.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-amber" href="app.html"><i data-lucide="zap"></i>Launch app</a>
+          <a class="btn btn-line" href="#bell"><i data-lucide="bell"></i>See the opening bell</a>
+        </div>
+        <div class="hero-facts">
+          <div><div class="fact-num">24/7</div><div class="fact-label">Borrow on nights and weekends</div></div>
+          <div><div class="fact-num">15s</div><div class="fact-label">Grace period after every open</div></div>
+          <div><div class="fact-num">$0</div><div class="fact-label">Lender loss in our 60% gap test</div></div>
+        </div>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        <div class="browser">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">afterhours.app</span></div>
+          <div class="screen">
+            <img id="shotNight" src="assets/shot-closed.webp" alt="" width="1920" height="1200" />
+            <img id="shotDay" class="hide" src="assets/shot-open.webp" alt="" width="1920" height="1200" />
+          </div>
+        </div>
+        <div class="float-dial">
+          <svg id="heroDial" viewBox="0 0 300 300"></svg>
+          <div class="center"><div><div class="state" id="dialState">After hours</div><div class="time" id="dialTime">3:00am ET</div></div></div>
+        </div>
+        <div class="float-chip" id="chip">
+          <span class="ico" id="chipIcon"><i data-lucide="moon-star"></i></span>
+          <span><span id="chipTitle">Overnight limit 40%</span><small id="chipSub">0.30% fee funds the gap reserve</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-label="Built with">
+    <div class="wrap">
+      <span><i data-lucide="blocks"></i>Built for Robinhood Chain</span>
+      <span><i data-lucide="circle-dollar-sign"></i>Borrow and lend in USDG</span>
+      <span><i data-lucide="layers"></i>Arbitrum Orbit technology</span>
+      <span><i data-lucide="file-code-2"></i>Solidity and Foundry, 17 tests</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ problem -->
+  <section class="section" aria-labelledby="problemTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="problemTitle">Stocks don't trade like crypto. Lending should know that.</h2>
+        <p class="lede">Tokenized stocks are onchain now, but they mostly sit idle. Generic DeFi lending treats them like tokens that trade every second, and that breaks in three predictable ways.</p>
+      </div>
+      <div class="problem">
+        <div>
+          <div class="big-num">76%</div>
+          <h3>Of the week, the market is closed</h3>
+          <p>Nights and weekends add up to 128 of 168 hours. Prices freeze, but onchain loans keep running.</p>
+        </div>
+        <div>
+          <div class="mini-icon"><i data-lucide="trending-down"></i></div>
+          <h3>Prices jump at the opening bell</h3>
+          <p>Overnight news lands all at once at 9:30am. A protocol that liquidates on the first print punishes borrowers and can leave bad debt.</p>
+        </div>
+        <div>
+          <div class="mini-icon"><i data-lucide="split"></i></div>
+          <h3>Splits and dividends change what you hold</h3>
+          <p>A 2-for-1 split doubles your balance and halves the price. Accounting that isn't built for it misprices every position.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ features -->
+  <section class="section" id="how" aria-labelledby="howTitle" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="howTitle">A lending market that reads the market clock</h2>
+        <p class="lede">Five rules, each enforced onchain, make tokenized equities safe to borrow against at any hour.</p>
+      </div>
+
+      <div class="bento">
+        <article class="card w4" id="ltvCard">
+          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start">
+            <div>
+              <span class="card-icon"><i data-lucide="gauge"></i></span>
+              <h3>Two borrow limits, one for each session</h3>
+              <p>While the market trades, NVIDIA backs loans up to 60% of its value. Overnight, new loans stop at 40%, because nobody knows where it will open.</p>
+            </div>
+            <div class="seg" role="group" aria-label="Show session">
+              <button type="button" aria-pressed="true" data-ltv="open"><i data-lucide="sun"></i>Market open</button>
+              <button type="button" aria-pressed="false" data-ltv="closed"><i data-lucide="moon"></i>Overnight</button>
+            </div>
+          </div>
+          <div class="shot-swap">
+            <img id="ltvOpen" src="assets/shot-position-open.webp" alt="Position card during market hours: health factor 1.40, $555 available to borrow" loading="lazy" width="1400" height="715" />
+            <img id="ltvClosed" src="assets/shot-position-closed.webp" alt="Position card after hours: above the overnight limit, loan still safe" loading="lazy" width="1400" height="715" style="opacity:0" />
+          </div>
+        </article>
+
+        <article class="card w2" id="reserveCard">
+          <span class="card-icon"><i data-lucide="shield-check"></i></span>
+          <h3>A gap reserve that pays first</h3>
+          <p>After-hours loans pay a 0.30% fee into a reserve. When a gap creates bad debt, the reserve covers it before lenders lose a cent.</p>
+          <div class="card-visual reserve">
+            <div class="reserve-row"><span>Bad debt</span><span class="reserve-bar"><i class="debt"></i></span><strong>$1,000</strong></div>
+            <div class="reserve-row"><span>Reserve paid</span><span class="reserve-bar"><i class="cover"></i></span><strong>$1,000</strong></div>
+            <div class="reserve-row"><span>Lenders lost</span><span class="reserve-bar"><i class="loss"></i></span><strong style="color:var(--safe)">$0</strong></div>
+          </div>
+          <div class="card-foot">Seeded with <strong>50,000 USDG</strong> and topped up by every after-hours loan. Numbers from our 60% gap test.</div>
+        </article>
+
+        <article class="card w2">
+          <span class="card-icon"><i data-lucide="timer"></i></span>
+          <h3>No liquidations on frozen prices</h3>
+          <p>Liquidations only run while the market is open, on a price published after the open, after a short grace period.</p>
+          <div class="card-visual countdown">
+            <svg viewBox="0 0 84 84" aria-hidden="true"><circle class="track" cx="42" cy="42" r="36"/><circle class="run" cx="42" cy="42" r="36"/></svg>
+            <div class="countdown-text"><strong>15s</strong>to repay after the bell, before anyone can liquidate you</div>
+          </div>
+        </article>
+
+        <article class="card w2">
+          <span class="card-icon"><i data-lucide="hand-coins"></i></span>
+          <h3>Dividends pay down your loan</h3>
+          <p>Dividends on deposited stock go straight to your debt. Anything left over is yours to claim in USDG.</p>
+          <div class="card-visual ledger">
+            <div><span class="muted">Loan</span><span><span class="strike">$1,387.50</span>$1,294.29</span></div>
+            <div><span class="muted">$5 dividend on 18.6 tNVDA</span><span class="minus">−$93.21</span></div>
+            <div><span class="muted">You did</span><span>nothing</span></div>
+          </div>
+        </article>
+
+        <article class="card w2">
+          <span class="card-icon"><i data-lucide="git-branch"></i></span>
+          <h3>Split-proof collateral</h3>
+          <p>Positions are tracked in shares, so a split changes the numbers you see and nothing about your risk.</p>
+          <div class="card-visual split">
+            <div class="split-box"><div class="k">Before</div><div class="v">30 @ $185</div><div class="k">Health <span class="hf">1.40</span></div></div>
+            <i data-lucide="arrow-right" class="split-arrow"></i>
+            <div class="split-box"><div class="k">After 2-for-1</div><div class="v">60 @ $92.50</div><div class="k">Health <span class="hf">1.40</span></div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ opening bell -->
+  <section class="section" id="bell" aria-labelledby="bellTitle" style="padding-top:20px">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="bellTitle">One night, two protocols</h2>
+        <p class="lede">A borrower holds 30 tNVDA and owes $2,775. Bad news breaks after the close. Scroll to see what happens next.</p>
+      </div>
+      <div class="bell">
+        <div class="bell-visual" aria-live="polite">
+          <div class="bell-time"><strong id="bellClock">4:00 pm</strong><span id="bellPrice">tNVDA $185.00</span></div>
+          <svg class="chart" viewBox="0 0 600 250" role="img" aria-label="tNVDA price from the afternoon close through the next morning's gap down">
+            <defs><clipPath id="reveal"><rect id="revealRect" x="0" y="0" width="110" height="250" /></clipPath></defs>
+            <rect class="night-band" x="110" y="20" width="320" height="200" />
+            <text class="lbl" x="270" y="40" text-anchor="middle">Market closed</text>
+            <line class="axis" x1="20" y1="222" x2="590" y2="222" />
+            <line class="liq-line" x1="20" y1="184" x2="590" y2="184" />
+            <text class="liq-lbl" x="24" y="178">Liquidation line, $132</text>
+            <g clip-path="url(#reveal)">
+              <path class="price" d="M30 76 L50 72 L70 79 L90 68 L110 70" />
+              <path class="ghost" d="M110 70 L430 70" />
+              <path class="price" d="M430 70 L430 190 L470 189 L510 191 L545 188 L580 190" />
+            </g>
+            <line class="cursor" id="cursor" x1="0" y1="20" x2="0" y2="222" style="transform:translateX(110px)" />
+            <circle class="dot" id="dot" cx="0" cy="0" r="6" style="transform:translate(110px,70px)" />
+            <text class="lbl" x="30" y="240" text-anchor="middle">3pm</text>
+            <text class="lbl" x="110" y="240" text-anchor="middle">4pm close</text>
+            <text class="lbl" x="270" y="240" text-anchor="middle">midnight</text>
+            <text class="lbl" x="430" y="240" text-anchor="middle">9:30 open</text>
+          </svg>
+          <div class="lanes">
+            <div class="lane" id="laneG">
+              <div class="lane-name"><i data-lucide="box"></i>Generic lending</div>
+              <div class="lane-hf" id="laneGHf">1.40</div>
+              <div class="lane-text" id="laneGText"></div>
+            </div>
+            <div class="lane" id="laneA">
+              <div class="lane-name"><i data-lucide="moon-star"></i>AfterHours</div>
+              <div class="lane-hf" id="laneAHf">1.40</div>
+              <div class="lane-text" id="laneAText"></div>
+            </div>
+          </div>
+        </div>
+
+        <ol class="steps" id="steps">
+          <li class="step active" data-step="0">
+            <span class="step-num">1</span>
+            <h3>4:00 pm. The market closes.</h3>
+            <p>tNVDA's last price is $185. AfterHours switches every stock to its overnight borrow limit and starts charging a small fee on new loans. Existing loans are untouched.</p>
+          </li>
+          <li class="step" data-step="1">
+            <span class="step-num">2</span>
+            <h3>11:40 pm. News breaks.</h3>
+            <p>Nobody can trade, so the price is frozen. AfterHours won't liquidate anyone on a price that can't move, so the borrower sleeps through it.</p>
+          </li>
+          <li class="step" data-step="2">
+            <span class="step-num">3</span>
+            <h3>9:30 am. It opens 30% lower.</h3>
+            <p>tNVDA prints at $129.50 and the health factor falls to 0.98. A generic protocol liquidates in the first block. AfterHours waits for a real opening price and starts a 15-second grace period.</p>
+          </li>
+          <li class="step" data-step="3">
+            <span class="step-num">4</span>
+            <h3>9:30:15 am. Grace period ends.</h3>
+            <p>The borrower had a window to repay. They didn't, so liquidation runs normally: half the loan is repaid and the liquidator receives tNVDA at a 6% discount.</p>
+          </li>
+          <li class="step" data-step="4">
+            <span class="step-num">5</span>
+            <h3>And if the gap is huge?</h3>
+            <p>In our test, a 60% gap left $1,000 of debt that no collateral could cover. The gap reserve paid it. Lenders lost nothing.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ screenshots -->
+  <section class="section" id="screens" aria-labelledby="screensTitle" style="padding-top:40px">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="screensTitle">The whole interface follows the session</h2>
+        <p class="lede">Daylight blue while New York trades, ink and amber after the close. Every screen below is the real app running on a local chain.</p>
+      </div>
+      <div class="tabs" role="tablist" id="tabs"></div>
+      <div class="gallery">
+        <div class="gallery-stage" id="galleryStage" data-kind="browser">
+          <div class="browser">
+            <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">afterhours.app</span></div>
+            <div class="screen"><img id="galleryImg" src="assets/shot-open.webp" alt="" loading="lazy" width="1920" height="1200" /></div>
+          </div>
+          <div class="phone"><img id="galleryPhone" src="assets/shot-mobile.webp" alt="AfterHours on a phone, after hours" loading="lazy" width="780" height="1688" /></div>
+        </div>
+        <div class="gallery-caption">
+          <h3 id="galleryTitle"></h3>
+          <p id="galleryText"></p>
+          <a class="btn btn-line btn-sm" href="app.html"><i data-lucide="play"></i>Try it yourself</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ onchain -->
+  <section class="section" id="onchain" aria-labelledby="onchainTitle" style="padding-top:40px">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h2" id="onchainTitle">Running onchain right now</h2>
+        <p class="lede" id="onchainLede">Numbers below are read live from the pool contract.</p>
+      </div>
+      <div class="onchain">
+        <div>
+          <div class="stats">
+            <div class="stat"><div class="k">Lent by suppliers</div><div class="v" id="stLent">—</div></div>
+            <div class="stat"><div class="k">Borrowed</div><div class="v" id="stBorrowed">—</div></div>
+            <div class="stat"><div class="k">Gap reserve</div><div class="v" id="stReserve">—</div></div>
+            <div class="stat"><div class="k">Market right now</div><div class="v" id="stMarket">—</div></div>
+          </div>
+          <div class="onchain-actions">
+            <button class="btn btn-line btn-sm" type="button" id="addNetwork"><i data-lucide="wallet"></i>Add network to wallet</button>
+            <span class="empty-note" id="blockNote"></span>
+          </div>
+        </div>
+        <div class="contracts">
+          <h3><i data-lucide="file-code-2"></i>Contracts</h3>
+          <div class="sub" id="contractsSub">Deployed with ./start.sh</div>
+          <div id="contractRows"><p class="empty-note">Deploy with <strong>./start.sh robinhood</strong> and the addresses appear here with explorer links.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ try -->
+  <section class="section" aria-labelledby="tryTitle" style="padding-top:40px;padding-bottom:0">
+    <div class="wrap">
+      <div class="try">
+        <div style="position:relative">
+          <h2 class="h2" id="tryTitle">Try a whole trading week in two minutes</h2>
+          <p class="lede" style="margin-bottom:26px">No wallet setup, no pop-ups. Every action confirms in about a second.</p>
+          <a class="btn btn-amber" href="app.html"><i data-lucide="zap"></i>Launch app</a>
+        </div>
+        <ol>
+          <li><div><strong>Connect the instant demo wallet</strong><span>A wallet kept in your browser, funded with test USDG and stocks in one click.</span></div></li>
+          <li><div><strong>Open the demo console</strong><span>It replays real market events: the close, an overnight gap, a dividend, a split.</span></div></li>
+          <li><div><strong>Watch the rules work</strong><span>Limits tighten at night, liquidations wait for the bell, dividends shrink your loan.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Back to top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 3a13 13 0 0 1 0 26z" fill="#f4b740"/></svg>
+      <span>AfterHours</span>
+    </a>
+    <nav aria-label="Footer">
+      <a href="app.html"><i data-lucide="zap"></i>App</a>
+      <a href="https://github.com/Gosplex/afterhours" id="repoLink" target="_blank" rel="noopener"><i data-lucide="github"></i>Source</a>
+      <a href="https://docs.robinhood.com/chain/" target="_blank" rel="noopener"><i data-lucide="book-open"></i>Robinhood Chain docs</a>
+      <a href="https://docs.paxos.com/guides/stablecoin/usdg" target="_blank" rel="noopener"><i data-lucide="circle-dollar-sign"></i>USDG</a>
+    </nav>
+    <span>Testnet build with test tokens. Not audited, not financial advice.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="config.js" onerror="window.AFTERHOURS_CONFIG=null"></script>
+<script src="abi.js"></script>
+<script src="landing.js"></script>
+</body>
+</html>

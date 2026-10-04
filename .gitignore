@@ -1,0 +1,10 @@
+.env
+.anvil.log
+.deploy.log
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+contracts/lib/
+frontend/config.js.bak
+node_modules/
+.vercel
